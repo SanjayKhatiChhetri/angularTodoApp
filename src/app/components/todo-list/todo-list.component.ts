@@ -50,15 +50,19 @@ export class TodoListComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateTodoStatus(todo: Todo) {
-    const newStatus = todo.status === 'DONE' ? 'OPEN' : 'DONE';
+  updateTodoStatus(updatedTodo: Todo) {
     this.todoService
-      .updateTodo(todo.id, todo.title, todo.description, newStatus)
+      .updateTodo(
+        updatedTodo.id,
+        updatedTodo.title,
+        updatedTodo.description,
+        updatedTodo.status
+      )
       .subscribe({
-        next: (updatedTodo) => {
-          const index = this.todos.findIndex((t) => t.id === todo.id);
+        next: (response) => {
+          const index = this.todos.findIndex((t) => t.id === updatedTodo.id);
           if (index !== -1) {
-            this.todos[index] = updatedTodo.data;
+            this.todos[index] = response.data;
           }
         },
         error: (error) => {

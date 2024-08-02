@@ -40,7 +40,13 @@
     flex-direction: row;
     align-items: center;
   }
+  .todo-content {
+    flex: 65%;
+  }
+
   .todo-actions {
+    flex: 35%;
     margin-top: 0;
+    justify-content: center;
   }
 }
