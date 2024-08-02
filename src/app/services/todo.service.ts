@@ -1,8 +1,7 @@
-// src/app/services/todo.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -10,6 +9,9 @@ import { environment } from '../../environments/environment';
 })
 export class TodoService {
   private apiUrl = `${environment.apiUrl}/todo`;
+  private todoCreatedSource = new Subject<void>();
+
+  todoCreated$ = this.todoCreatedSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +24,11 @@ export class TodoService {
     description: string,
     status: string
   ): Observable<any> {
-    return this.http.post(this.apiUrl, { title, description, status });
+    return this.http.post(this.apiUrl, { title, description, status }).pipe(
+      tap(() => {
+        this.todoCreatedSource.next();
+      })
+    );
   }
 
   updateTodo(

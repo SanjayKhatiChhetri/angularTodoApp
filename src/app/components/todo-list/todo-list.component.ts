@@ -1,10 +1,9 @@
-// src/app/components/todo-list/todo-list.component.ts
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoService } from '../../services/todo.service';
 import { TodoFormComponent } from '../todo-form/todo-form.component';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
+import { Subscription } from 'rxjs';
 
 interface Todo {
   id: number;
@@ -16,17 +15,28 @@ interface Todo {
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, TodoFormComponent, TodoItemComponent],
+  imports: [CommonModule, TodoFormComponent, TodoItemComponent], //
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css'],
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
   todos: Todo[] = [];
+  private todoSubscription: Subscription;
 
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService) {
+    this.todoSubscription = this.todoService.todoCreated$.subscribe(() => {
+      this.loadTodos();
+    });
+  }
 
   ngOnInit() {
     this.loadTodos();
+  }
+
+  ngOnDestroy() {
+    if (this.todoSubscription) {
+      this.todoSubscription.unsubscribe();
+    }
   }
 
   loadTodos() {
@@ -38,10 +48,6 @@ export class TodoListComponent implements OnInit {
         console.error('Error loading todos:', error);
       },
     });
-  }
-
-  onTodoAdded(todo: Todo) {
-    this.todos.unshift(todo);
   }
 
   updateTodoStatus(todo: Todo) {
@@ -61,6 +67,13 @@ export class TodoListComponent implements OnInit {
       });
   }
 
+  updateTodo(updatedTodo: Todo) {
+    const index = this.todos.findIndex((todo) => todo.id === updatedTodo.id);
+    if (index !== -1) {
+      this.todos[index] = updatedTodo;
+    }
+  }
+
   deleteTodo(id: number) {
     this.todoService.deleteTodo(id).subscribe({
       next: () => {
@@ -70,12 +83,5 @@ export class TodoListComponent implements OnInit {
         console.error('Error deleting todo:', error);
       },
     });
-  }
-
-  updateTodo(updatedTodo: Todo) {
-    const index = this.todos.findIndex((todo) => todo.id === updatedTodo.id);
-    if (index !== -1) {
-      this.todos[index] = updatedTodo;
-    }
   }
 }

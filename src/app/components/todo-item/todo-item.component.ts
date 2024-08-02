@@ -16,14 +16,24 @@ interface Todo {
   standalone: true,
   imports: [CommonModule, MatButtonModule],
   template: `
-    <div class="todo-item" [ngClass]="{ completed: todo.status === 'DONE' }">
+    <div
+      class="todo-item"
+      [ngClass]="{ 'todo-completed': todo.status === 'DONE' }"
+    >
       <div class="todo-content">
         <h3>{{ todo.title }}</h3>
         <p>{{ todo.description }}</p>
         <span class="todo-status">Status: {{ todo.status }}</span>
       </div>
       <div class="todo-actions">
-        <button mat-button (click)="toggleStatus()">
+        <button
+          mat-button
+          (click)="toggleStatus()"
+          [ngClass]="{
+            'btn-complete': todo.status !== 'DONE',
+            'btn-reopen': todo.status === 'DONE'
+          }"
+        >
           {{ todo.status === 'DONE' ? 'Reopen' : 'Complete' }}
         </button>
         <button mat-button (click)="openEditModal()">Edit</button>
@@ -41,6 +51,11 @@ export class TodoItemComponent {
 
   constructor(public dialog: MatDialog) {}
 
+  toggleStatus(): void {
+    const newStatus = this.todo.status === 'DONE' ? 'OPEN' : 'DONE';
+    this.statusChanged.emit({ ...this.todo, status: newStatus });
+  }
+
   openEditModal(): void {
     const dialogRef = this.dialog.open(TodoEditModalComponent, {
       width: '80%',
@@ -56,11 +71,6 @@ export class TodoItemComponent {
         this.todoUpdated.emit(result);
       }
     });
-  }
-
-  toggleStatus(): void {
-    const newStatus = this.todo.status === 'DONE' ? 'OPEN' : 'DONE';
-    this.statusChanged.emit({ ...this.todo, status: newStatus });
   }
 
   deleteTodo(): void {
