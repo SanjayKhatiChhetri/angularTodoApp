@@ -1,0 +1,21 @@
+<!-- src/app/components/todo-list/todo-list.component.html -->
+
+<div class="todo-container">
+  <h1 class="todo-title">My Todo List</h1>
+
+  <app-todo-form (todoAdded)="onTodoAdded($event)"></app-todo-form>
+
+  <div class="todo-list">
+    @for (todo of todos; track todo.id) {
+      <app-todo-item
+        [todo]="todo"
+        (todoUpdated)="updateTodo($event)"
+        (todoDeleted)="deleteTodo($event)"
+        (statusChanged)="updateTodoStatus($event)"
+      >
+      </app-todo-item>
+    } @empty {
+      <p class="no-todos">No todos yet. Add one above!</p>
+    }
+  </div>
+</div>

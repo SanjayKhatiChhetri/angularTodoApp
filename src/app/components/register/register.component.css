@@ -1,0 +1,83 @@
+@import "../../../styles/form.css";
+
+.btn-submit {
+  background-color: #1877f2;
+}
+
+.btn-submit:hover {
+  background-color: #166fe5;
+}
+
+/* src/app/components/register/register.component.css */
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.register-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.register-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.btn-register {
+  background-color: #42b72a;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+  background-color: #36a420;
+}
+
+.btn-register:disabled {
+  background-color: #9cb3d8;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #c00;
+  text-align: center;
+  margin-top: 1rem;
+}

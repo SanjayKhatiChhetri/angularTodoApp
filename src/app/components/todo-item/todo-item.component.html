@@ -1,0 +1,27 @@
+<div class="todo-item" [ngClass]="{ completed: todo.status === 'DONE' }">
+  <div *ngIf="!isEditing" class="todo-content">
+    <h3>{{ todo.title }}</h3>
+    <p>{{ todo.description }}</p>
+    <span class="todo-status">Status: {{ todo.status }}</span>
+    <div class="todo-actions">
+      <button (click)="toggleStatus()" class="btn btn-primary">
+        {{ todo.status === "DONE" ? "Reopen" : "Complete" }}
+      </button>
+      <button (click)="startEditing()" class="btn btn-secondary">Edit</button>
+      <button (click)="deleteTodo()" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+
+  <div *ngIf="isEditing" class="todo-edit-form">
+    <input [(ngModel)]="editedTodo.title" placeholder="Title">
+    <textarea [(ngModel)]="editedTodo.description" placeholder="Description"></textarea>
+    <select aria-label="progress" [(ngModel)]="editedTodo.status">
+      <option value="OPEN">Open</option>
+      <option value="PROGRESS">In Progress</option>
+      <option value="TESTING">Testing</option>
+      <option value="DONE">Done</option>
+    </select>
+    <button (click)="saveEdit()" class="btn btn-success">Save</button>
+    <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+  </div>
+</div>

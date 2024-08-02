@@ -1,0 +1,84 @@
+/* src/app/components/todo-list/todo-list.component.css */
+
+.todo-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.todo-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-item.completed {
+  background-color: #e8f5e9;
+}
+
+.todo-content h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.todo-content p {
+  margin: 0 0 5px 0;
+  color: #666;
+}
+
+.todo-status {
+  font-size: 0.9em;
+  color: #888;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #da190b;
+}
+
+.no-todos {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
