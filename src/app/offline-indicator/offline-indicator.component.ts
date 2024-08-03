@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SwUpdate } from '@angular/service-worker';
 
 @Component({
@@ -28,24 +28,34 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class OfflineIndicatorComponent implements OnInit {
   offline = false;
+  private isBrowser: boolean;
 
-  constructor(private swUpdate: SwUpdate) {}
+  constructor(
+    private swUpdate: SwUpdate,
+    @Inject(PLATFORM_ID) platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
-    this.checkNetworkStatus();
-    window.addEventListener('online', this.checkNetworkStatus.bind(this));
-    window.addEventListener('offline', this.checkNetworkStatus.bind(this));
+    if (this.isBrowser) {
+      this.checkNetworkStatus();
+      window.addEventListener('online', this.checkNetworkStatus.bind(this));
+      window.addEventListener('offline', this.checkNetworkStatus.bind(this));
 
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.versionUpdates.subscribe(() => {
-        if (confirm('New version available. Load New Version?')) {
-          window.location.reload();
-        }
-      });
+      if (this.swUpdate.isEnabled) {
+        this.swUpdate.versionUpdates.subscribe(() => {
+          if (confirm('New version available. Load New Version?')) {
+            window.location.reload();
+          }
+        });
+      }
     }
   }
 
   private checkNetworkStatus() {
-    this.offline = !navigator.onLine;
+    if (this.isBrowser) {
+      this.offline = !navigator.onLine;
+    }
   }
 }
