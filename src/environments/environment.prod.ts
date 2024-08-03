@@ -2,5 +2,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://your-production-api-url.com/api',
+  apiUrl: 'https://todo-angular-backend-66258471f835.herokuapp.com/api',
 };
