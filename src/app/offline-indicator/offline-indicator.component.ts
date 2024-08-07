@@ -44,11 +44,7 @@ export class OfflineIndicatorComponent implements OnInit {
       window.addEventListener('offline', this.checkNetworkStatus.bind(this));
 
       if (this.swUpdate.isEnabled) {
-        this.swUpdate.versionUpdates.subscribe(() => {
-          if (confirm('New version available. Load New Version?')) {
-            window.location.reload();
-          }
-        });
+        this.swUpdate.versionUpdates.subscribe(() => {});
       }
     }
   }
