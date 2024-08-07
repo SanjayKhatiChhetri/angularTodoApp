@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build -- --configuration production"
   },
   "private": true,
   "dependencies": {
@@ -44,5 +44,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0"
   },
-  "engines": {}
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  }
 }
