@@ -10,7 +10,6 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { provideClientHydration } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -24,7 +23,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { provideServiceWorker } from '@angular/service-worker';
 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideServiceWorker('ngsw-worker.js', {
@@ -33,7 +31,6 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
     importProvidersFrom(
@@ -54,9 +51,10 @@ export const appConfig: ApplicationConfig = {
         height: 'auto',
         panelClass: 'custom-dialog-container',
       },
-    }, provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }),
+    },
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };

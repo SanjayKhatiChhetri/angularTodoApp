@@ -1,7 +1,0 @@
-{
-  "/api": {
-    "target": "https://todo-angular-backend-66258471f835.herokuapp.com",
-    "secure": true,
-    "changeOrigin": true
-  }
-}
