@@ -104,14 +104,29 @@ angular-todo-app/
 │   └── server.js
 ```
 
-This structure reflects the current state of Angular Todo app project, including:
+## Key Components
 
-1. The `src/app/components` directory containing all Angular components.
-2. The `src/app/guards` and `src/app/interceptors` directories for authentication-related functionality.
-3. The `src/app/services` directory for auth and todo services.
-4. The new `src/app/offline-indicator` directory for the offline indicator component.
-5. Configuration files like `.env`, `angular.json`, and `ngsw-config.json` for Progressive Web App (PWA) setup.
-6. The `backend` directory structure for backend, including controllers, models, routes, and middleware.
+- `LoginComponent` & `RegisterComponent`: Handle user authentication
+- `TodoListComponent`: Displays and manages the list of todos
+- `TodoItemComponent`: Represents individual todo items
+- `TodoFormComponent`: Allows creation of new todos
+- `TodoEditModalComponent`: Modal for editing existing todos
+- `OfflineIndicatorComponent`: Indicates when the app is offline
+
+## Services
+
+- `AuthService`: Manages authentication state and API calls
+- `TodoService`: Handles CRUD operations for todos
+
+## Backend API
+
+The backend is built with Node.js, Express, and PostgreSQL, providing RESTful endpoints for todo and user management.
+
+## Deployment
+
+- Frontend: Deployed on Vercel
+- Backend: Deployed on Heroku
+- Database: Hosted on neon.tech
 
 ## Architecture
 
@@ -174,11 +189,11 @@ This structure reflects the current state of Angular Todo app project, including
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please [open a issue](https://github.com/SanjayKhatiChhetri/angularTodoApp/issues) or submit a [Pull Request](https://github.com/SanjayKhatiChhetri/angularTodoApp/pulls).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/SanjayKhatiChhetri/angularTodoApp/blob/main/LICENSE) file for details. Contact If you have any questions or inquiries, please contact Sanjay Khati Chhetri, social can be found at [Github Profile](https://github.com/SanjayKhatiChhetri) under Where to find me section.
 
 ## Acknowledgments
 
